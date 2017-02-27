@@ -1,46 +1,27 @@
 function setup() {
-    createCanvas(500, 500);
+    createCanvas(800, 800);
     background(0);
     stroke(255);
     noFill();
     var nPoints = 10;
     var origin = {
-        x: 250,
-        y: 250
+        x: 400,
+        y: 400
     }
-    var radius = 160;
-    var distortFactor = 40;
+    var radius = 240;
+    var distortFactor = 80;
+
     var points = getLoopPoints(nPoints, origin, radius);
     var points = distortPoints(points, distortFactor);
-    drawSplineLoop(points);
     
-    var points2 = getLoopPoints(nPoints, distortPoint(origin, 40), radius);
+    var points2 = getLoopPoints(nPoints, distortPoint(origin, 80), radius);
     var points2 = distortPoints(points2, distortFactor);
-    drawSplineLoop(points2);
-
-    // interpolation 1
-    var pointsInterpolated = interpolatePoints(points, points2);
-    drawSplineLoop(pointsInterpolated);
-
-    // interpolation 2
-    var pointsInterpolated2 = interpolatePoints(points, pointsInterpolated);
-    drawSplineLoop(pointsInterpolated2);
-
-    var pointsInterpolated3 = interpolatePoints(points2, pointsInterpolated);
-    drawSplineLoop(pointsInterpolated3);
-
-    // interpolation 3
-    var pointsInterpolated4 = interpolatePoints(points, pointsInterpolated2);
-    drawSplineLoop(pointsInterpolated4);
     
-    var pointsInterpolated5 = interpolatePoints(pointsInterpolated2, pointsInterpolated);
-    drawSplineLoop(pointsInterpolated5);
-
-    var pointsInterpolated6 = interpolatePoints(pointsInterpolated, pointsInterpolated3);
-    drawSplineLoop(pointsInterpolated6);
-    
-    var pointsInterpolated7 = interpolatePoints(pointsInterpolated3, points2);
-    drawSplineLoop(pointsInterpolated7);
+    var interpolatedSplines = recurseInterpolation([points, points2], 4);
+    console.log(interpolatedSplines);
+    for (var i = 0; i < interpolatedSplines.length; i++) {
+        drawSplineLoop(interpolatedSplines[i]);
+    }
 }
 
 function draw() {
@@ -105,5 +86,24 @@ function interpolatePoints(points, points2) {
     }
     else {
         return false;
+    }
+}
+
+function recurseInterpolation(splineLoops, cycles) {
+    if (cycles == 0) {
+        console.log("basecase");
+        return splineLoops;
+    }
+    else {
+        var interpolatedSplines = []
+        interpolatedSplines.push(splineLoops[0]);
+        for (var i = 0; i < splineLoops.length; i++) {
+            if (splineLoops[i+1]) {
+                console.log(i);
+                interpolatedSplines.push(interpolatePoints(splineLoops[i], splineLoops[i+1]));
+                interpolatedSplines.push(splineLoops[i+1]);
+            }
+        }
+        return recurseInterpolation(interpolatedSplines, cycles - 1)
     }
 }
