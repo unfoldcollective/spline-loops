@@ -1,33 +1,82 @@
 var DEBUG = false;
 
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(1200, 700);
     background(0);
     stroke(255);
     noFill();
 
+    var interpolationSteps = 4;
+
     var teal = color('#0096AC');
     var pink = color('#FBD2CE');
-    var interpolatedColors = recurseInterpolateColors([teal, pink], 4);
+    var purple = color('#796CAF');
+    var green = color('#9CFCCF');
+    var colorCombo1 = [teal, pink];
+    var colorCombo2 = [purple, pink];
+    var colorCombo3 = [teal, green];
+
+    var interpolatedColors1 = recurseInterpolateColors(colorCombo1, interpolationSteps);
+    var interpolatedColors2 = recurseInterpolateColors(colorCombo2, interpolationSteps);
+    var interpolatedColors3 = recurseInterpolateColors(colorCombo3, interpolationSteps);
 
     var nPoints = 10;
     var origin = {
-        x: 400,
-        y: 400
+        x: 850,
+        y: 350
     }
-    var radius = 240;
+    var radius = 300;
     var distortFactor = 80;
 
     var points = getLoopPoints(nPoints, origin, radius);
     var points = distortPoints(points, distortFactor);
-    var points2 = getLoopPoints(nPoints, distortPoint(origin, 80), radius);
+    var points2 = getLoopPoints(nPoints, distortPoint(origin, distortFactor), radius);
     var points2 = distortPoints(points2, distortFactor);
     
-    var interpolatedSplines = recurseInterpolation([points, points2], 4);
-    console.log(interpolatedSplines);
-    for (var i = 0; i < interpolatedSplines.length; i++) {
-        stroke(interpolatedColors[i]);
-        drawSplineLoop(interpolatedSplines[i]);
+    var interpolatedSplines1 = recurseInterpolation([points, points2], interpolationSteps);
+    for (var i = 0; i < interpolatedSplines1.length; i++) {
+        stroke(interpolatedColors1[i]);
+        drawSplineLoop(interpolatedSplines1[i]);
+    }
+
+    // loop 2
+    var nPoints = 10;
+    var origin = {
+        x: 350,
+        y: 400
+    }
+    var radius = 500;
+    var distortFactor = 150;
+
+    var points = getLoopPoints(nPoints, origin, radius);
+    var points = distortPoints(points, distortFactor);
+    var points2 = getLoopPoints(nPoints, distortPoint(origin, distortFactor), radius);
+    var points2 = distortPoints(points2, distortFactor);
+    
+    var interpolatedSplines2 = recurseInterpolation([points, points2], interpolationSteps);
+    for (var i = 0; i < interpolatedSplines2.length; i++) {
+        stroke(interpolatedColors2[i]);
+        drawSplineLoop(interpolatedSplines2[i]);
+    }
+
+    // loop 3
+    var nPoints = 10;
+    var origin = {
+        x: 600,
+        y: 200
+    }
+    var radius = 400;
+    var distortFactor = 80;
+
+    var points = getLoopPoints(nPoints, origin, radius);
+    var points = distortPoints(points, distortFactor);
+    var points2 = getLoopPoints(nPoints, distortPoint(origin, distortFactor), radius);
+    var points2 = distortPoints(points2, distortFactor);
+    
+    var interpolatedSplines3 = recurseInterpolation([points, points2], interpolationSteps);
+    for (var i = 0; i < interpolatedSplines3.length; i++) {
+        stroke(interpolatedColors3[i]);
+        drawSplineLoop(interpolatedSplines3[i]);
     }
 }
 
@@ -101,7 +150,7 @@ function interpolatePoints(points, points2) {
 function recurseInterpolation(splineLoops, cycles) {
     if (cycles == 0) {
         if (DEBUG) {
-        console.log("basecase");
+            console.log("basecase");
         }
         return splineLoops;
     }
@@ -111,7 +160,7 @@ function recurseInterpolation(splineLoops, cycles) {
         for (var i = 0; i < splineLoops.length; i++) {
             if (splineLoops[i+1]) {
                 if (DEBUG) {
-                console.log(i);
+                    console.log(i);
                 }
                 interpolatedSplines.push(interpolatePoints(splineLoops[i], splineLoops[i+1]));
                 interpolatedSplines.push(splineLoops[i+1]);
@@ -124,7 +173,7 @@ function recurseInterpolation(splineLoops, cycles) {
 function recurseInterpolateColors(colors, cycles) {
     if (cycles == 0) {
         if (DEBUG) {
-        console.log('basecase colors');
+            console.log('basecase colors');
         }
         return colors
     }
@@ -134,7 +183,7 @@ function recurseInterpolateColors(colors, cycles) {
         for (var i = 0; i < colors.length; i++) {
             if (colors[i+1]) {
                 if (DEBUG) {
-                console.log(i);
+                    console.log(i);
                 }
                 interpolatedColors.push(lerpColor(colors[i], colors[i+1], 0.5));
                 interpolatedColors.push(colors[i+1]);
