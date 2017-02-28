@@ -1,3 +1,5 @@
+var DEBUG = false;
+
 function setup() {
     createCanvas(800, 800);
     background(0);
@@ -70,9 +72,11 @@ function interpolatePoints(points, points2) {
         colorMode(HSB, points.length);
         middles = [];
         for (var i = 0; i < points.length; i++) {
+            if (DEBUG) {
             fill(i,points.length,points.length);
             ellipse(points[i].x, points[i].y, 5,5);
             ellipse(points2[i].x, points2[i].y, 5,5);
+            }
 
             // calculate middle between points
             middles.push({
