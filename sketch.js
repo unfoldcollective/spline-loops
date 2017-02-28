@@ -57,7 +57,7 @@ function SplineLoop(settings) {
             })
         }
         return points
-    }
+    };
 
     this.interpolateSplines = function () {
         var spline1 = this.getLoopPoints(this.settings.nPoints, this.settings.origin, this.settings.radius);
@@ -68,11 +68,11 @@ function SplineLoop(settings) {
         spline2 = this.distortPoints(spline2, this.settings.distortFactor);
         // console.log(spline2);
         this.interpolatedSplines = this.recurseInterpolation([spline1, spline2], this.settings.interpolationSteps);
-    }
+    };
 
     this.interpolateColors = function () {
         this.interpolatedColors = this.recurseInterpolateColors(this.settings.colors, this.settings.interpolationSteps);
-    }
+    };
 
     this.drawSplineLoop = function (points) {
         beginShape();
@@ -92,14 +92,14 @@ function SplineLoop(settings) {
             }
             this.drawSplineLoop(this.interpolatedSplines[i]);
         }
-    }
+    };
 
     this.distortPoint = function (point, distortFactor) {
         return {
             x: point.x + random(-distortFactor,distortFactor),
             y: point.y + random(-distortFactor,distortFactor)
         };
-    }
+    };
 
     this.distortPoints = function (points, distortFactor) {
         var distortedPoints = [];
@@ -107,7 +107,7 @@ function SplineLoop(settings) {
             distortedPoints.push(this.distortPoint(points[i], distortFactor));
         }
         return distortedPoints;
-    }
+    };
 
     this.interpolatePoints = function (points, points2) {
         if (points.length === points2.length) {
@@ -133,7 +133,7 @@ function SplineLoop(settings) {
         else {
             return false;
         }
-    }
+    };
 
     this.recurseInterpolation = function (splineLoops, cycles) {
         if (cycles == 0) {
@@ -156,7 +156,7 @@ function SplineLoop(settings) {
             }
             return this.recurseInterpolation(interpolatedSplines, cycles - 1)
         }
-    }
+    };
 
     this.recurseInterpolateColors = function (colors, cycles) {
         if (cycles == 0) {
@@ -179,7 +179,7 @@ function SplineLoop(settings) {
             }
             return this.recurseInterpolateColors(interpolatedColors, cycles - 1);
         }
-    }
+    };
 
     this.interpolateSplines();
     this.interpolateColors();
