@@ -5,6 +5,11 @@ function setup() {
     background(0);
     stroke(255);
     noFill();
+
+    var teal = color('#0096AC');
+    var pink = color('#FBD2CE');
+    var interpolatedColors = recurseInterpolateColors([teal, pink], 4);
+
     var nPoints = 10;
     var origin = {
         x: 400,
@@ -15,13 +20,13 @@ function setup() {
 
     var points = getLoopPoints(nPoints, origin, radius);
     var points = distortPoints(points, distortFactor);
-    
     var points2 = getLoopPoints(nPoints, distortPoint(origin, 80), radius);
     var points2 = distortPoints(points2, distortFactor);
     
     var interpolatedSplines = recurseInterpolation([points, points2], 4);
     console.log(interpolatedSplines);
     for (var i = 0; i < interpolatedSplines.length; i++) {
+        stroke(interpolatedColors[i]);
         drawSplineLoop(interpolatedSplines[i]);
     }
 }
@@ -73,9 +78,9 @@ function interpolatePoints(points, points2) {
         middles = [];
         for (var i = 0; i < points.length; i++) {
             if (DEBUG) {
-            fill(i,points.length,points.length);
-            ellipse(points[i].x, points[i].y, 5,5);
-            ellipse(points2[i].x, points2[i].y, 5,5);
+                fill(i,points.length,points.length);
+                ellipse(points[i].x, points[i].y, 5,5);
+                ellipse(points2[i].x, points2[i].y, 5,5);
             }
 
             // calculate middle between points
@@ -109,5 +114,24 @@ function recurseInterpolation(splineLoops, cycles) {
             }
         }
         return recurseInterpolation(interpolatedSplines, cycles - 1)
+    }
+}
+
+function recurseInterpolateColors(colors, cycles) {
+    if (cycles == 0) {
+        console.log('basecase colors');
+        return colors
+    }
+    else {
+        var interpolatedColors = [];
+        interpolatedColors.push(colors[0]);
+        for (var i = 0; i < colors.length; i++) {
+            if (colors[i+1]) {
+                console.log(i);
+                interpolatedColors.push(lerpColor(colors[i], colors[i+1], 0.5));
+                interpolatedColors.push(colors[i+1]);
+            }
+        }
+        return recurseInterpolateColors(interpolatedColors, cycles - 1);
     }
 }
