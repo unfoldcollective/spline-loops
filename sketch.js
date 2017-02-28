@@ -100,7 +100,9 @@ function interpolatePoints(points, points2) {
 
 function recurseInterpolation(splineLoops, cycles) {
     if (cycles == 0) {
+        if (DEBUG) {
         console.log("basecase");
+        }
         return splineLoops;
     }
     else {
@@ -108,7 +110,9 @@ function recurseInterpolation(splineLoops, cycles) {
         interpolatedSplines.push(splineLoops[0]);
         for (var i = 0; i < splineLoops.length; i++) {
             if (splineLoops[i+1]) {
+                if (DEBUG) {
                 console.log(i);
+                }
                 interpolatedSplines.push(interpolatePoints(splineLoops[i], splineLoops[i+1]));
                 interpolatedSplines.push(splineLoops[i+1]);
             }
@@ -119,7 +123,9 @@ function recurseInterpolation(splineLoops, cycles) {
 
 function recurseInterpolateColors(colors, cycles) {
     if (cycles == 0) {
+        if (DEBUG) {
         console.log('basecase colors');
+        }
         return colors
     }
     else {
@@ -127,7 +133,9 @@ function recurseInterpolateColors(colors, cycles) {
         interpolatedColors.push(colors[0]);
         for (var i = 0; i < colors.length; i++) {
             if (colors[i+1]) {
+                if (DEBUG) {
                 console.log(i);
+                }
                 interpolatedColors.push(lerpColor(colors[i], colors[i+1], 0.5));
                 interpolatedColors.push(colors[i+1]);
             }
