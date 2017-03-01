@@ -1,7 +1,7 @@
 var DEBUG = false;
 
 function setup() {
-    createCanvas(700, 700);
+    createCanvas(windowWidth, windowHeight);
     background(0);
     frameRate(30);
     smooth();
@@ -18,8 +18,8 @@ function setup() {
     splineSettings1 = {
         nPoints: 10,
         origin: {
-            x: 350,
-            y: 350
+            x: 0.5 * width,
+            y: 0.5 * height
         },
         radius: 200,
         distortFactor: 80,
@@ -35,6 +35,10 @@ function draw() {
     splineLoop.update();
     splineLoop.drawSplines();
 
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
 }
 
 function SplineLoop(settings) {
