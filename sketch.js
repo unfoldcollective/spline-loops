@@ -9,9 +9,9 @@ function setup() {
     var pink = color('#FBD2CE');
     var purple = color('#796CAF');
     var green = color('#9CFCCF');
-    var colorCombo1 = [teal, pink];
-    var colorCombo2 = [purple, pink];
-    var colorCombo3 = [teal, green];
+    var colorCombo1 = [pink, teal];
+    var colorCombo2 = [pink, purple];
+    var colorCombo3 = [green, teal];
 
     splineSettings1 = {
         nPoints: 10,
