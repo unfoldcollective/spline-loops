@@ -10,27 +10,49 @@ function SplineLoop(settings) {
         distortFactor: 60,
         colors: [color('#0096AC'), color('#FBD2CE')],
         interpolationSteps: 4,
-        moveFactor: 0.4
+        moveFactor: 0.4,
+        movement: {
+            perspective: true,
+            tightness: false
+        }
     };
     defaultSettings.distortFactor = defaultSettings.radius / 5;
     this.settings = merge_options(defaultSettings, settings);
 
     this.DEBUG = false;
 
-    this.update = function () {
-        this.moveSpline(this.spline1, this.orginalSpline1, 1);
-        this.moveSpline(this.spline2, this.orginalSpline2, -1);
-        this.interpolateSplines();
-    }
+    // set initial mouse pos to middle of screen to ensure neutral perspective on load
+    mouseX = 0.5 * width;
+    mouseY = 0.5 * height;
 
-    this.moveSpline = function (spline, baseSpline, sign) {
+    this.update = function () {
+        if (this.settings.movement.perspective) {
+            // perspective shift based on mouse position
+            this.shiftSpline(this.spline1, this.orginalSpline1, 1);
+            this.shiftSpline(this.spline2, this.orginalSpline2, -1);
+        }
+
+        if (this.settings.movement.tightness) {
+            // shift tightness of curves
+            this.shiftTightness();
+        }        
+
+        this.interpolateSplines();
+    };
+
+    this.shiftTightness = function () {
+        var t = map(mouseX, 0, width, -5, 5);
+        curveTightness(t);
+    };
+
+    this.shiftSpline = function (spline, baseSpline, sign) {
         for (var i = 0; i < spline.length; i++) {
             var mouseDiffX = sign * (mouseX - this.settings.origin.x);
             var mouseDiffY = sign * (mouseY - this.settings.origin.y);
             spline[i].x = baseSpline[i].x + this.settings.moveFactor * mouseDiffX;
             spline[i].y = baseSpline[i].y + this.settings.moveFactor * mouseDiffY;
         }
-    }
+    };
 
     this.getLoopPoints = function(nPoints, origin, radius) {
         var points = [];
