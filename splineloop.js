@@ -10,10 +10,11 @@ function SplineLoop(settings) {
         distortFactor: 60,
         colors: [color('#0096AC'), color('#FBD2CE')],
         interpolationSteps: 4,
-        moveFactor: 0.4,
         movement: {
-            perspective: true,
-            tightness: false
+            moveFactor: 0.2,    // 0 == no positional animation
+            noiseFactor: 0,     // 0 == no noise
+            easeFactor: 1,      // 1 == no easing
+            tightnessFactor: 0  // 0 == no tightness animation 
         }
     };
     defaultSettings.distortFactor = defaultSettings.radius / 5;
@@ -21,39 +22,55 @@ function SplineLoop(settings) {
 
     this.DEBUG = false;
 
+    this.noise = 1 - random(this.settings.movement.noiseFactor);
+    console.log(this.noise);
+
     // set initial mouse pos to middle of screen to ensure neutral perspective on load
     mouseX = 0.5 * width;
     mouseY = 0.5 * height;
 
-    this.noiseFactor = random(1);
-
     this.update = function () {
-        if (this.settings.movement.perspective) {
-            // perspective shift based on mouse position
-            this.shiftSpline(this.spline1, this.orginalSpline1, 1);
-            this.shiftSpline(this.spline2, this.orginalSpline2, -1);
-        }
+        
+        // eased perspective shift based on mouse position
+        this.easeSplinePos(this.spline1, 1);
+        this.easeSplinePos(this.spline2, -1);
 
-        if (this.settings.movement.tightness) {
-            // shift tightness of curves
-            this.shiftTightness();
-        }        
+        // shift tightness of curves
+        this.shiftTightness();    
 
         this.interpolateSplines();
     };
 
-    this.shiftTightness = function () {
-        var t = map(mouseX, 0, width, -5, 5);
-        curveTightness(t);
+    this.easeSplinePos = function (spline, sign) {
+        var mouseDiffX = mouseX - this.settings.origin.x;
+        var mouseDiffY = mouseY - this.settings.origin.y;
+        var targetX = this.settings.origin.x + mouseDiffX * sign * this.settings.movement.moveFactor * this.noise;
+        var targetY = this.settings.origin.y + mouseDiffY * sign * this.settings.movement.moveFactor * this.noise;
+        var dX = (targetX - getCentroid(spline).x);
+        var dY = (targetY - getCentroid(spline).y);
+        
+        for (var i = 0; i < spline.length; i++) {
+            // move points closer to target
+            spline[i].x += this.settings.movement.easeFactor * dX;
+            spline[i].y += this.settings.movement.easeFactor * dY;
+        }
     };
 
-    this.shiftSpline = function (spline, baseSpline, sign) {
+    /* DEPRECATED 
+     * equivalent behaviour achieved via easeSplinePost with easeFactor == 1 
+     */
+    this.shiftSplinePos = function (spline, baseSpline, sign) {
+        var mouseDiffX = mouseX - this.settings.origin.x;
+        var mouseDiffY = mouseY - this.settings.origin.y;
         for (var i = 0; i < spline.length; i++) {
-            var mouseDiffX = sign * (mouseX - this.settings.origin.x);
-            var mouseDiffY = sign * (mouseY - this.settings.origin.y);
-            spline[i].x = baseSpline[i].x + this.settings.moveFactor * mouseDiffX * this.noiseFactor;
-            spline[i].y = baseSpline[i].y + this.settings.moveFactor * mouseDiffY * this.noiseFactor;
+            spline[i].x = baseSpline[i].x + mouseDiffX * sign * this.settings.movement.moveFactor * this.noise;
+            spline[i].y = baseSpline[i].y + mouseDiffY * sign * this.settings.movement.moveFactor * this.noise;
         }
+    };
+    
+    this.shiftTightness = function () {
+        var t = map(mouseX, 0, width, 0, -5);
+        curveTightness(t * this.settings.movement.tightnessFactor);
     };
 
     this.getLoopPoints = function(nPoints, origin, radius) {
@@ -124,10 +141,10 @@ function SplineLoop(settings) {
 
     this.interpolatePoints = function (points, points2) {
         if (points.length === points2.length) {
-            colorMode(HSB, points.length);
             middles = [];
             for (var i = 0; i < points.length; i++) {
                 if (this.DEBUG) {
+                    colorMode(HSB, points.length);
                     noStroke();
                     fill(i,points.length,points.length);
                     ellipse(points[i].x, points[i].y, 5,5);
@@ -204,4 +221,17 @@ function merge_options(obj1,obj2){
     for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
     for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
     return obj3;
+}
+
+function getCentroid(points) {
+    total = {x: 0, y: 0};
+    for (var i = 0; i < points.length; i++) {
+        total.x += points[i].x;
+        total.y += points[i].y;
+    }
+    centroid = {
+        x: total.x / points.length,
+        y: total.y / points.length
+    }
+    return centroid;
 }

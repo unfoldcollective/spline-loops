@@ -23,7 +23,12 @@ function setup() {
         distortFactor: 80,
         colors: colorCombo1,
         interpolationSteps: 4,
-        moveFactor: 0.2
+        movement: {
+            moveFactor: 0.2,    // 0 == no positional animation
+            noiseFactor: 1,     // 0 == no noise
+            easeFactor: 0.05,   // 1 == no easing
+            tightnessFactor: 0  // 0 == no tightness animation 
+        }
     }
     splineLoop1 = new SplineLoop(splineSettings1);
 
@@ -37,7 +42,12 @@ function setup() {
         distortFactor: 80,
         colors: colorCombo2,
         interpolationSteps: 4,
-        moveFactor: 0.2
+        movement: {
+            moveFactor: 0.2,    // 0 == no positional animation
+            noiseFactor: 1,     // 0 == no noise
+            easeFactor: 0.05,   // 1 == no easing
+            tightnessFactor: 0  // 0 == no tightness animation 
+        }
     }
     splineLoop2 = new SplineLoop(splineSettings2);
 
@@ -51,7 +61,12 @@ function setup() {
         distortFactor: 80,
         colors: colorCombo3,
         interpolationSteps: 4,
-        moveFactor: 0.2
+        movement: {
+            moveFactor: 0.2,    // 0 == no positional animation
+            noiseFactor: 1,     // 0 == no noise
+            easeFactor: 0.05,   // 1 == no easing
+            tightnessFactor: 0  // 0 == no tightness animation 
+        }
     }
     splineLoop3 = new SplineLoop(splineSettings3);
 }
