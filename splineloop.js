@@ -25,6 +25,8 @@ function SplineLoop(settings) {
     mouseX = 0.5 * width;
     mouseY = 0.5 * height;
 
+    this.noiseFactor = random(1);
+
     this.update = function () {
         if (this.settings.movement.perspective) {
             // perspective shift based on mouse position
@@ -49,8 +51,8 @@ function SplineLoop(settings) {
         for (var i = 0; i < spline.length; i++) {
             var mouseDiffX = sign * (mouseX - this.settings.origin.x);
             var mouseDiffY = sign * (mouseY - this.settings.origin.y);
-            spline[i].x = baseSpline[i].x + this.settings.moveFactor * mouseDiffX;
-            spline[i].y = baseSpline[i].y + this.settings.moveFactor * mouseDiffY;
+            spline[i].x = baseSpline[i].x + this.settings.moveFactor * mouseDiffX * this.noiseFactor;
+            spline[i].y = baseSpline[i].y + this.settings.moveFactor * mouseDiffY * this.noiseFactor;
         }
     };
 
