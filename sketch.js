@@ -3,6 +3,8 @@ var DEBUG = false;
 function setup() {
     createCanvas(700, 700);
     background(0);
+    frameRate(30);
+    smooth();
     noFill();
 
     var teal = color('#0096AC');
@@ -23,12 +25,15 @@ function setup() {
         distortFactor: 80,
         colors: colorCombo1,
         interpolationSteps: 4,
-        colors: colorCombo1
+        moveFactor: 0.4
     }
-    new SplineLoop().drawSplines();
+    splineLoop = new SplineLoop(splineSettings1);
 }
 
 function draw() {
+    background(0);
+    splineLoop.update();
+    splineLoop.drawSplines();
 
 }
 
@@ -43,10 +48,26 @@ function SplineLoop(settings) {
         radius: 200,
         distortFactor: 60,
         colors: [color('#0096AC'), color('#FBD2CE')],
-        interpolationSteps: 4
+        interpolationSteps: 4,
+        moveFactor: 0.4
     };
     defaultSettings.distortFactor = defaultSettings.radius / 5;
     this.settings = merge_options(defaultSettings, settings);
+
+    this.update = function () {
+        this.moveSpline(this.spline1, this.orginalSpline1, 1);
+        this.moveSpline(this.spline2, this.orginalSpline2, -1);
+        this.interpolateSplines();
+    }
+
+    this.moveSpline = function (spline, baseSpline, sign) {
+        for (var i = 0; i < spline.length; i++) {
+            var mouseDiffX = sign * (mouseX - this.settings.origin.x);
+            var mouseDiffY = sign * (mouseY - this.settings.origin.y);
+            spline[i].x = baseSpline[i].x + this.settings.moveFactor * mouseDiffX;
+            spline[i].y = baseSpline[i].y + this.settings.moveFactor * mouseDiffY;
+        }
+    }
 
     this.getLoopPoints = function(nPoints, origin, radius) {
         var points = [];
@@ -59,15 +80,20 @@ function SplineLoop(settings) {
         return points
     };
 
-    this.interpolateSplines = function () {
-        var spline1 = this.getLoopPoints(this.settings.nPoints, this.settings.origin, this.settings.radius);
-        spline1 = this.distortPoints(spline1, this.settings.distortFactor);
-        // console.log(spline1);
+    this.generateSplines = function () {
+        this.spline1 = this.getLoopPoints(this.settings.nPoints, this.settings.origin, this.settings.radius);
+        this.spline1 = this.distortPoints(this.spline1, this.settings.distortFactor);
+        // save deep copy (not by reference)
+        this.orginalSpline1 = JSON.parse(JSON.stringify(this.spline1));
 
-        var spline2 = this.getLoopPoints(this.settings.nPoints, this.settings.origin, this.settings.radius);
-        spline2 = this.distortPoints(spline2, this.settings.distortFactor);
-        // console.log(spline2);
-        this.interpolatedSplines = this.recurseInterpolation([spline1, spline2], this.settings.interpolationSteps);
+        this.spline2 = this.getLoopPoints(this.settings.nPoints, this.settings.origin, this.settings.radius);
+        this.spline2 = this.distortPoints(this.spline2, this.settings.distortFactor);
+        // save deep copy (not by reference)
+        this.orginalSpline2 = JSON.parse(JSON.stringify(this.spline2));
+    };
+
+    this.interpolateSplines = function () {
+        this.interpolatedSplines = this.recurseInterpolation([this.spline1, this.spline2], this.settings.interpolationSteps);
     };
 
     this.interpolateColors = function () {
@@ -181,6 +207,7 @@ function SplineLoop(settings) {
         }
     };
 
+    this.generateSplines();
     this.interpolateSplines();
     this.interpolateColors();
 
