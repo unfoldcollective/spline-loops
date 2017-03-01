@@ -24,8 +24,8 @@ function setup() {
         colors: colorCombo1,
         interpolationSteps: 4,
         movement: {
-            moveFactor: 0.2,    // 0 == no positional animation
-            noiseFactor: 1,     // 0 == no noise
+            moveFactor: -0.2,    // 0 == no positional animation
+            noiseFactor: 0.6,     // 0 == no noise
             easeFactor: 0.05,   // 1 == no easing
             tightnessFactor: 0  // 0 == no tightness animation 
         }
@@ -43,8 +43,8 @@ function setup() {
         colors: colorCombo2,
         interpolationSteps: 4,
         movement: {
-            moveFactor: 0.2,    // 0 == no positional animation
-            noiseFactor: 1,     // 0 == no noise
+            moveFactor: -0.2,    // 0 == no positional animation
+            noiseFactor: 0.6,     // 0 == no noise
             easeFactor: 0.05,   // 1 == no easing
             tightnessFactor: 0  // 0 == no tightness animation 
         }
@@ -62,8 +62,8 @@ function setup() {
         colors: colorCombo3,
         interpolationSteps: 4,
         movement: {
-            moveFactor: 0.2,    // 0 == no positional animation
-            noiseFactor: 1,     // 0 == no noise
+            moveFactor: -0.2,    // 0 == no positional animation
+            noiseFactor: 0.6,     // 0 == no noise
             easeFactor: 0.05,   // 1 == no easing
             tightnessFactor: 0  // 0 == no tightness animation 
         }
