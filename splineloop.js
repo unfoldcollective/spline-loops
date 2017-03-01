@@ -36,7 +36,7 @@ function SplineLoop(settings) {
         this.easeSplinePos(this.spline2, -1);
 
         // shift tightness of curves
-        this.shiftTightness();    
+        this.shiftTightness();
 
         this.interpolateSplines();
     };
@@ -97,7 +97,7 @@ function SplineLoop(settings) {
     };
 
     this.interpolateSplines = function () {
-        this.interpolatedSplines = this.recurseInterpolation([this.spline1, this.spline2], this.settings.interpolationSteps);
+        this.interpolatedSplines = this.recurseInterpolateSplines([this.spline1, this.spline2], this.settings.interpolationSteps);
     };
 
     this.interpolateColors = function () {
@@ -149,6 +149,8 @@ function SplineLoop(settings) {
                     fill(i,points.length,points.length);
                     ellipse(points[i].x, points[i].y, 5,5);
                     ellipse(points2[i].x, points2[i].y, 5,5);
+                    noFill();
+                    colorMode(RGB, 255);
                 }
 
                 // calculate middle between points
@@ -157,8 +159,6 @@ function SplineLoop(settings) {
                     y: points[i].y - (0.5 * (points[i].y - points2[i].y))
                 });
             }
-            noFill();
-            colorMode(RGB, 255);
             return middles;
         }
         else {
@@ -166,7 +166,7 @@ function SplineLoop(settings) {
         }
     };
 
-    this.recurseInterpolation = function (splineLoops, cycles) {
+    this.recurseInterpolateSplines = function (splineLoops, cycles) {
         if (cycles == 0) {
             return splineLoops;
         }
@@ -179,7 +179,7 @@ function SplineLoop(settings) {
                     interpolatedSplines.push(splineLoops[i+1]);
                 }
             }
-            return this.recurseInterpolation(interpolatedSplines, cycles - 1)
+            return this.recurseInterpolateSplines(interpolatedSplines, cycles - 1)
         }
     };
 
@@ -203,7 +203,6 @@ function SplineLoop(settings) {
     this.generateSplines();
     this.interpolateSplines();
     this.interpolateColors();
-
 }
 
 /***********/
