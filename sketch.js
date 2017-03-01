@@ -1,5 +1,3 @@
-var DEBUG = false;
-
 function setup() {
     createCanvas(windowWidth, windowHeight);
     background(0);
@@ -57,6 +55,8 @@ function SplineLoop(settings) {
     };
     defaultSettings.distortFactor = defaultSettings.radius / 5;
     this.settings = merge_options(defaultSettings, settings);
+
+    this.DEBUG = false;
 
     this.update = function () {
         this.moveSpline(this.spline1, this.orginalSpline1, 1);
@@ -144,7 +144,7 @@ function SplineLoop(settings) {
             colorMode(HSB, points.length);
             middles = [];
             for (var i = 0; i < points.length; i++) {
-                if (DEBUG) {
+                if (this.DEBUG) {
                     fill(i,points.length,points.length);
                     ellipse(points[i].x, points[i].y, 5,5);
                     ellipse(points2[i].x, points2[i].y, 5,5);
@@ -167,9 +167,6 @@ function SplineLoop(settings) {
 
     this.recurseInterpolation = function (splineLoops, cycles) {
         if (cycles == 0) {
-            if (DEBUG) {
-                console.log("basecase");
-            }
             return splineLoops;
         }
         else {
@@ -177,9 +174,6 @@ function SplineLoop(settings) {
             interpolatedSplines.push(splineLoops[0]);
             for (var i = 0; i < splineLoops.length; i++) {
                 if (splineLoops[i+1]) {
-                    if (DEBUG) {
-                        console.log(i);
-                    }
                     interpolatedSplines.push(this.interpolatePoints(splineLoops[i], splineLoops[i+1]));
                     interpolatedSplines.push(splineLoops[i+1]);
                 }
@@ -190,9 +184,6 @@ function SplineLoop(settings) {
 
     this.recurseInterpolateColors = function (colors, cycles) {
         if (cycles == 0) {
-            if (DEBUG) {
-                console.log('basecase colors');
-            }
             return colors
         }
         else {
@@ -200,9 +191,6 @@ function SplineLoop(settings) {
             interpolatedColors.push(colors[0]);
             for (var i = 0; i < colors.length; i++) {
                 if (colors[i+1]) {
-                    if (DEBUG) {
-                        console.log(i);
-                    }
                     interpolatedColors.push(lerpColor(colors[i], colors[i+1], 0.5));
                     interpolatedColors.push(colors[i+1]);
                 }
