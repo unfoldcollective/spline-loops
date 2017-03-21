@@ -23,7 +23,6 @@ function SplineLoop(settings) {
     this.DEBUG = false;
 
     this.noise = 1 - random(this.settings.movement.noiseFactor);
-    console.log(this.noise);
 
     // set initial mouse pos to middle of screen to ensure neutral perspective on load
     mouseX = 0.5 * width;
