@@ -16,72 +16,27 @@ function setup() {
     splineSettings1 = {
         nPoints: 10,
         origin: {
-            x: 0.33 * width,
-            y: 0.6 * height
+            x: 0.5 * width,
+            y: 0.5 * height
         },
-        radius: 450,
-        distortFactor: 80,
+        radius: 200,
+        distortFactor: 50,
         colors: colorCombo1,
         interpolationSteps: 4,
         movement: {
-            moveFactor: -0.2,    // 0 == no positional animation
-            noiseFactor: 0.6,     // 0 == no noise
+            moveFactor: 0.5,    // 0 == no positional animation
+            noiseFactor: 0,     // 0 == no noise
             easeFactor: 0.05,   // 1 == no easing
             tightnessFactor: 0  // 0 == no tightness animation 
         }
     }
     splineLoop1 = new SplineLoop(splineSettings1);
-
-    splineSettings2 = {
-        nPoints: 10,
-        origin: {
-            x: 0.66 * width,
-            y: 0.6 * height
-        },
-        radius: 350,
-        distortFactor: 80,
-        colors: colorCombo2,
-        interpolationSteps: 4,
-        movement: {
-            moveFactor: -0.2,    // 0 == no positional animation
-            noiseFactor: 0.6,     // 0 == no noise
-            easeFactor: 0.05,   // 1 == no easing
-            tightnessFactor: 0  // 0 == no tightness animation 
-        }
-    }
-    splineLoop2 = new SplineLoop(splineSettings2);
-
-    splineSettings3 = {
-        nPoints: 10,
-        origin: {
-            x: 0.5 * width,
-            y: 0.4 * height
-        },
-        radius: 400,
-        distortFactor: 80,
-        colors: colorCombo3,
-        interpolationSteps: 4,
-        movement: {
-            moveFactor: -0.2,    // 0 == no positional animation
-            noiseFactor: 0.6,     // 0 == no noise
-            easeFactor: 0.05,   // 1 == no easing
-            tightnessFactor: 0  // 0 == no tightness animation 
-        }
-    }
-    splineLoop3 = new SplineLoop(splineSettings3);
 }
 
 function draw() {
     background(0);
     splineLoop1.update();
     splineLoop1.drawSplines();
-
-    splineLoop2.update();
-    splineLoop2.drawSplines();
-
-    splineLoop3.update();
-    splineLoop3.drawSplines();
-
 }
 
 function windowResized() {
