@@ -54,18 +54,6 @@ function SplineLoop(settings) {
             spline[i].y += this.settings.movement.easeFactor * dY;
         }
     };
-
-    /* DEPRECATED 
-     * equivalent behaviour achieved via easeSplinePost with easeFactor == 1 
-     */
-    this.shiftSplinePos = function (spline, baseSpline, sign) {
-        var mouseDiffX = mouseX - this.settings.origin.x;
-        var mouseDiffY = mouseY - this.settings.origin.y;
-        for (var i = 0; i < spline.length; i++) {
-            spline[i].x = baseSpline[i].x + mouseDiffX * sign * this.settings.movement.moveFactor * this.noise;
-            spline[i].y = baseSpline[i].y + mouseDiffY * sign * this.settings.movement.moveFactor * this.noise;
-        }
-    };
     
     this.shiftTightness = function () {
         var t = map(mouseX, 0, width, 0, -5);
@@ -96,7 +84,7 @@ function SplineLoop(settings) {
     };
 
     this.interpolateSplines = function () {
-        this.interpolatedSplines = this.recurseInterpolateSplines([this.spline1, this.spline2], this.settings.interpolationSteps);
+            this.interpolatedSplines = this.recurseInterpolateSplines([this.spline1, this.spline2], this.settings.interpolationSteps);
     };
 
     this.interpolateColors = function () {
