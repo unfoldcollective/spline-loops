@@ -154,8 +154,8 @@ function SplineLoop(settings) {
 
                 // calculate middle between points
                 middles.push({
-                    x: points[i].x - (0.5 * (points[i].x - points2[i].x)),
-                    y: points[i].y - (0.5 * (points[i].y - points2[i].y))
+                    x: (points[i].x + points2[i].x) / 2,
+                    y: (points[i].y + points2[i].y) / 2
                 });
             }
             return middles;
