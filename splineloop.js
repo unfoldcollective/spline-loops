@@ -102,7 +102,7 @@ function SplineLoop(settings) {
         endShape();
     }
     
-    this.drawSplines = function () {
+    this.draw = function () {
         for (var i = 0; i < this.interpolatedSplines.length; i++) {
             if (this.interpolatedColors) {
                 stroke(this.interpolatedColors[i]);

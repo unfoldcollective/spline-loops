@@ -1,3 +1,16 @@
+var hasMouseMoved, mouseTimeout;
+
+document.addEventListener("DOMContentLoaded", function(){
+    document.addEventListener('mousemove', function onFirstMouseMove() {
+        hasMouseMoved = true;
+        
+        clearTimeout(mouseTimeout);
+        mouseTimeout = setTimeout(function () {
+            hasMouseMoved = false;
+        }, 5000);
+    }, false);
+});
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
     background(0);
@@ -31,12 +44,15 @@ function setup() {
         }
     }
     splineLoop1 = new SplineLoop(splineSettings1);
+    splineLoop1.draw();
 }
 
 function draw() {
-    background(0);
-    splineLoop1.update();
-    splineLoop1.drawSplines();
+    if (hasMouseMoved) {
+        background(0);
+        splineLoop1.update();
+        splineLoop1.draw();
+    }
 }
 
 function windowResized() {
