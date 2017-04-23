@@ -1,9 +1,18 @@
 .text{
 	position: absolute;
-	left: 1em;
-	bottom: 0.7em;
+	left: 10%;
+	bottom: 10%;
 	color: white;
-	font-size: 5em;
+	font-size: 3em;
 	font-family: "Montserrat", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+}
 
+.light {
+	font-family: "Montserrat-Light", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+}
+.extra-light {
+	font-family: "Montserrat-ExtraLight", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+}
+.semi-bold {
+	font-family: "Montserrat-SemiBold", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
 }
