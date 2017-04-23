@@ -27,13 +27,13 @@ function setup() {
     var colorCombo3 = [purple, pink];
 
     splineSettings1 = {
-        nPoints: 10,
+        nPoints: 8,
         origin: {
-            x: 0.5 * width,
-            y: 0.5 * height
+            x: 0.6 * width,
+            y: 0.4 * height
         },
-        radius: 200,
-        distortFactor: 50,
+        radius: 300,
+        distortFactor: 100,
         colors: colorCombo1,
         interpolationSteps: 4,
         movement: {
@@ -45,6 +45,14 @@ function setup() {
     }
     splineLoop1 = new SplineLoop(splineSettings1);
     splineLoop1.draw();
+
+    var text = addText("Speaker Name")
+}
+
+function addText(string) {
+    text = createDiv(string);
+    text.class("text");
+    return text;
 }
 
 function draw() {
