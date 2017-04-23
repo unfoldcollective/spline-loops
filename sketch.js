@@ -21,6 +21,7 @@ var speakerNames = [
     "<div class='event-name'>Vera-Maria Glahn | FIELD</div><span class='event-title extra-light'>Generative Audio-visual Experiences</span>"
 ];
 var speakerText;
+var showCursor = true;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -73,6 +74,8 @@ function setSpeakerText(index) {
 function keyTyped() {
     if (parseInt(key) > 0 && parseInt(key) <= speakerNames.length) {
         setSpeakerText(parseInt(key)-1)
+    } else if (key === "c") {
+        toggleCursor();
     }
     // uncomment to prevent any default behavior
     // return false;
@@ -82,6 +85,18 @@ function addText(string) {
     myText = createDiv(string);
     myText.class("text");
     return myText;
+}
+
+function mouseClicked() {
+}
+
+function toggleCursor() {
+    if (showCursor) {
+        noCursor();
+    } else {
+        cursor(ARROW);
+    }
+    showCursor = !showCursor;
 }
 
 function draw() {
