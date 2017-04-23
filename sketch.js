@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 var speakerNames = [
-    "<div class='event-name'>Daniel Llugany | Domestic Data Streamers</div><span class='event-title extra-light'>New Data Languages and Emoji's</span>",
+    "<div class='event-name'>Daniel Llugany | Domestic Data Streamers</div><span class='event-title extra-light'>New Data Languages 😍</span>",
     "<div class='event-name'>Gene Kogan</div><span class='event-title extra-light'>Machine Learning for Artists</span>",
     "<div class='event-name'>Santi Vilanova | Playmodes</div><span class='event-title extra-light'>Immersive Experiences</span>",
     "<div class='event-name'>Mario Klingemann</div><span class='event-title extra-light'>Artificial Intelligence</ispan",
