@@ -20,6 +20,8 @@ function SplineLoop(settings) {
     defaultSettings.distortFactor = defaultSettings.radius / 5;
     this.settings = merge_options(defaultSettings, settings);
 
+    this.vertexFactor = 1;
+
     this.DEBUG = false;
 
     this.noise = 1 - random(this.settings.movement.noiseFactor);
@@ -37,7 +39,10 @@ function SplineLoop(settings) {
         // shift tightness of curves
         this.shiftTightness();
 
-        this.interpolateSplines();
+        // scale single spline x position
+        var scaledSpline1 = this.scaleSplinePosX(this.spline1, this.vertexFactor);
+
+        this.interpolateSplines(scaledSpline1, this.spline2);
     };
 
     this.easeSplinePos = function (spline, sign) {
@@ -54,6 +59,16 @@ function SplineLoop(settings) {
             spline[i].y += this.settings.movement.easeFactor * dY;
         }
     };
+
+    this.scaleSplinePosX = function (spline, factor) {
+        // create deep copy of spline
+        var scaledSpline = JSON.parse(JSON.stringify(spline));
+        for (var i = 0; i < scaledSpline.length; i++) {
+            // scale points x position
+            scaledSpline[i].x *= factor;
+        }
+        return scaledSpline;
+    }
     
     this.shiftTightness = function () {
         var t = map(mouseX, 0, width, 0, -5);
@@ -83,8 +98,8 @@ function SplineLoop(settings) {
         this.orginalSpline2 = JSON.parse(JSON.stringify(this.spline2));
     };
 
-    this.interpolateSplines = function () {
-            this.interpolatedSplines = this.recurseInterpolateSplines([this.spline1, this.spline2], this.settings.interpolationSteps);
+    this.interpolateSplines = function (spline1, spline2) {
+        this.interpolatedSplines = this.recurseInterpolateSplines([spline1, spline2], this.settings.interpolationSteps);
     };
 
     this.interpolateColors = function () {
@@ -188,13 +203,16 @@ function SplineLoop(settings) {
     };
 
     this.setColors = function (color1, color2) {
-        console.log(color1);
         this.settings.colors = [color1, color2];
         this.interpolateColors();
-    }
+    };
+
+    this.setVertexFactor = function (factor) {
+        this.vertexFactor = factor;
+    };
 
     this.generateSplines();
-    this.interpolateSplines();
+    this.interpolateSplines(this.spline1, this.spline2);
     this.interpolateColors();
 }
 

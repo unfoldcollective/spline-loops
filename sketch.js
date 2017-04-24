@@ -24,6 +24,8 @@ var speakerText;
 var showCursor = true;
 var colorCombinations;
 
+var mic;
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
     background(0);
@@ -60,6 +62,13 @@ function setup() {
     splineLoop1.draw();
 
     speakerText = addText(speakerNames[0])
+
+    // Create an Audio input
+    mic = new p5.AudioIn();
+
+    // start the Audio Input.
+    // By default, it does not .connect() (to the computer speakers)
+    mic.start();
 }
 
 function combine(colors) {
@@ -119,6 +128,9 @@ function draw() {
         splineLoop1.update();
         splineLoop1.draw();
     }
+    // Get the overall volume (between 0 and 1.0)
+    var vol = mic.getLevel();
+    splineLoop1.setVertexFactor(1+vol);
 }
 
 function windowResized() {
