@@ -22,6 +22,7 @@ var speakerNames = [
 ];
 var speakerText;
 var showCursor = true;
+var colorCombinations;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -34,9 +35,9 @@ function setup() {
     var pink = color('#FBD2CE');
     var purple = color('#796CAF');
     var green = color('#9CFCCF');
-    var colorCombo1 = [teal, pink];
-    var colorCombo2 = [teal, green];
-    var colorCombo3 = [purple, pink];
+    
+    var colors = [teal, pink, purple, green];
+    colorCombinations = combine(colors);
 
     splineSettings1 = {
         nPoints: 8,
@@ -45,8 +46,8 @@ function setup() {
             y: 0.4 * height
         },
         radius: 300,
-        distortFactor: 100,
-        colors: colorCombo1,
+        distortFactor: 150,
+        colors: [teal, pink],
         interpolationSteps: 4,
         movement: {
             moveFactor: 0.5,    // 0 == no positional animation
@@ -61,19 +62,32 @@ function setup() {
     speakerText = addText(speakerNames[0])
 }
 
+function combine(colors) {
+    var combinations = []
+    for (var i = colors.length - 1; i >= 0; i--) {
+        for (var j = colors.length - 1; j >= 0; j--) {
+            if (colors[i] !== colors[j]) {
+                combinations.push([colors[i], colors[j]])
+            }
+        }
+    }
+    return combinations
+}
+
 function includes(array, item) {
     return array.indexOf(item) > -1
 }
 
 function setSpeakerText(index) {
-    console.log('setSpeakerText')
-    console.log(index);
+    console.log('setSpeakerText: ' + index);
     speakerText.elt.innerHTML = speakerNames[index];
 }
 
 function keyTyped() {
     if (parseInt(key) > 0 && parseInt(key) <= speakerNames.length) {
-        setSpeakerText(parseInt(key)-1)
+        setSpeakerText(parseInt(key)-1);
+        var randomColorCombi = colorCombinations[getRandomInt(0, colorCombinations.length)];
+        splineLoop1.setColors(randomColorCombi[0], randomColorCombi[1]);
     } else if (key === "c") {
         toggleCursor();
     }
@@ -109,4 +123,10 @@ function draw() {
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
 }

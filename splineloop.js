@@ -187,6 +187,12 @@ function SplineLoop(settings) {
         }
     };
 
+    this.setColors = function (color1, color2) {
+        console.log(color1);
+        this.settings.colors = [color1, color2];
+        this.interpolateColors();
+    }
+
     this.generateSplines();
     this.interpolateSplines();
     this.interpolateColors();
