@@ -27,8 +27,19 @@ function SplineLoop(settings) {
     this.noise = 1 - random(this.settings.movement.noiseFactor);
 
     // set initial mouse pos to middle of screen to ensure neutral perspective on load
-    mouseX = 0.5 * width;
-    mouseY = 0.5 * height;
+    this.cursor = {
+        x: 0.5 * width,
+        y: 0.5 * height
+    }
+
+    this.setCursor = function (cursor) {
+        if ( cursor.hasOwnProperty('x') && cursor.hasOwnProperty('y') ) {
+            this.cursor = cursor;
+        }  else {
+            console.log("cursor should look like {x: xValue, y: yValue} ")
+            return false;
+        }
+    }
 
     this.update = function () {
         
@@ -46,8 +57,8 @@ function SplineLoop(settings) {
     };
 
     this.easeSplinePos = function (spline, sign) {
-        var mouseDiffX = mouseX - this.settings.origin.x;
-        var mouseDiffY = mouseY - this.settings.origin.y;
+        var mouseDiffX = this.cursor.x - this.settings.origin.x;
+        var mouseDiffY = this.cursor.y - this.settings.origin.y;
         var targetX = this.settings.origin.x + mouseDiffX * sign * this.settings.movement.moveFactor * this.noise;
         var targetY = this.settings.origin.y + mouseDiffY * sign * this.settings.movement.moveFactor * this.noise;
         var dX = (targetX - getCentroid(spline).x);
@@ -71,7 +82,7 @@ function SplineLoop(settings) {
     }
     
     this.shiftTightness = function () {
-        var t = map(mouseX, 0, width, 0, -5);
+        var t = map(this.cursor.x, 0, width, 0, -5);
         curveTightness(t * this.settings.movement.tightnessFactor);
     };
 

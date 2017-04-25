@@ -131,6 +131,8 @@ function draw() {
     splineLoop1.update();
     splineLoop1.draw();
 
+    splineLoop1.setCursor({x: mouseX, y: mouseY});
+
     // Get the overall volume (between 0 and 1.0)
     var vol = mic.getLevel();
     splineLoop1.setVertexFactor(1+vol);
