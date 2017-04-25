@@ -5,7 +5,8 @@ var speakerNames = [
     "<div class='event-name'>Mario Klingemann</div><span class='event-title extra-light'>Artificial Intelligence</ispan",
     "<div class='event-name'>Panel Discussion</div><span class='event-title extra-light'>Vera-Maria Glahn, Mario Klingemann, Santi Vilanova &amp; Mlady Pes</span>",
     "<div class='event-name'>Mária Júdová</div><span class='event-title extra-light'>Dance Tech</ispan",
-    "<div class='event-name'>Vera-Maria Glahn | FIELD</div><span class='event-title extra-light'>Generative Audio-visual Experiences</span>"
+    "<div class='event-name'>Vera-Maria Glahn | FIELD</div><span class='event-title extra-light'>Generative Audio-visual Experiences</span>",
+    "<div class='event-name'>Thank you</div>",
 ];
 var speakerText;
 var showCursor = true;
