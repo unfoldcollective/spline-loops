@@ -48,7 +48,7 @@ function setup() {
     splineLoop1 = new SplineLoop(splineSettings1);
     splineLoop1.draw();
 
-    setMouseMoveListener(document);
+    // setMouseMoveListener(document);
 
     speakerText = addText(speakerNames[0])
 
@@ -60,6 +60,9 @@ function setup() {
     mic.start();
 }
 
+/*
+ * set mousemove listener, extending obj with boolean attr obj.hasMouseMoved
+ */
 function setMouseMoveListener(obj) {
     obj.addEventListener('mousemove', function onFirstMouseMove() {
         obj.hasMouseMoved = true;
@@ -123,12 +126,11 @@ function toggleCursor() {
     showCursor = !showCursor;
 }
 
-function draw() {
-    if (document.hasMouseMoved) {
-        background(0);
-        splineLoop1.update();
-        splineLoop1.draw();
-    }
+function draw() {    
+    background(0);
+    splineLoop1.update();
+    splineLoop1.draw();
+
     // Get the overall volume (between 0 and 1.0)
     var vol = mic.getLevel();
     splineLoop1.setVertexFactor(1+vol);
