@@ -41,8 +41,7 @@ function SplineLoop(settings) {
         }
     }
 
-    this.update = function () {
-        
+    this.update = function () {        
         // eased perspective shift based on mouse position
         this.easeSplinePos(this.spline1, 1);
         this.easeSplinePos(this.spline2, -1);

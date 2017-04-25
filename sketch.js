@@ -50,14 +50,21 @@ function setup() {
 
     // setMouseMoveListener(document);
 
+    var cursorIntervalID = window.setInterval(setRandomCursorPos, 5000);
+
     speakerText = addText(speakerNames[0])
 
     // Create an Audio input
     mic = new p5.AudioIn();
-
     // start the Audio Input.
     // By default, it does not .connect() (to the computer speakers)
     mic.start();
+}
+
+function setRandomCursorPos() {
+    var randX = getRandomInt(0, width);
+    var randY = getRandomInt(0, height);
+    splineLoop1.setCursor({x: randX, y: randY});
 }
 
 /*
@@ -131,7 +138,7 @@ function draw() {
     splineLoop1.update();
     splineLoop1.draw();
 
-    splineLoop1.setCursor({x: mouseX, y: mouseY});
+    // splineLoop1.setCursor({x: mouseX, y: mouseY});
 
     // Get the overall volume (between 0 and 1.0)
     var vol = mic.getLevel();
