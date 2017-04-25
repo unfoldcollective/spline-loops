@@ -48,7 +48,7 @@ function setup() {
     splineLoop1 = new SplineLoop(splineSettings1);
     splineLoop1.draw();
 
-    setMouseMoveListener();
+    setMouseMoveListener(document);
 
     speakerText = addText(speakerNames[0])
 
@@ -60,14 +60,14 @@ function setup() {
     mic.start();
 }
 
-function setMouseMoveListener() {
-    document.addEventListener('mousemove', function onFirstMouseMove() {
-        document.hasMouseMoved = true;
+function setMouseMoveListener(obj) {
+    obj.addEventListener('mousemove', function onFirstMouseMove() {
+        obj.hasMouseMoved = true;
         if (typeof mouseTimeout !== 'undefined') {
             clearTimeout(mouseTimeout);
         }
         var mouseTimeout = setTimeout(function () {
-            document.hasMouseMoved = false;
+            obj.hasMouseMoved = false;
         }, 5000);
     }, false);
 }
