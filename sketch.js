@@ -1,16 +1,3 @@
-var hasMouseMoved, mouseTimeout;
-
-document.addEventListener("DOMContentLoaded", function(){
-    document.addEventListener('mousemove', function onFirstMouseMove() {
-        hasMouseMoved = true;
-        
-        clearTimeout(mouseTimeout);
-        mouseTimeout = setTimeout(function () {
-            hasMouseMoved = false;
-        }, 5000);
-    }, false);
-});
-
 var speakerNames = [
     "<div class='event-name'>Daniel Llugany | Domestic Data Streamers</div><span class='event-title extra-light'>New Data Languages 😍</span>",
     "<div class='event-name'>Gene Kogan</div><span class='event-title extra-light'>Machine Learning for Artists</span>",
@@ -61,6 +48,8 @@ function setup() {
     splineLoop1 = new SplineLoop(splineSettings1);
     splineLoop1.draw();
 
+    setMouseMoveListener();
+
     speakerText = addText(speakerNames[0])
 
     // Create an Audio input
@@ -69,6 +58,18 @@ function setup() {
     // start the Audio Input.
     // By default, it does not .connect() (to the computer speakers)
     mic.start();
+}
+
+function setMouseMoveListener() {
+    document.addEventListener('mousemove', function onFirstMouseMove() {
+        document.hasMouseMoved = true;
+        if (typeof mouseTimeout !== 'undefined') {
+            clearTimeout(mouseTimeout);
+        }
+        var mouseTimeout = setTimeout(function () {
+            document.hasMouseMoved = false;
+        }, 5000);
+    }, false);
 }
 
 function combine(colors) {
@@ -123,7 +124,7 @@ function toggleCursor() {
 }
 
 function draw() {
-    if (hasMouseMoved) {
+    if (document.hasMouseMoved) {
         background(0);
         splineLoop1.update();
         splineLoop1.draw();
