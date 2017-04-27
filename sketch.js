@@ -8,7 +8,7 @@ var speakerNames = [
     "<div class='event-name'>Vera-Maria Glahn | FIELD</div><span class='event-title extra-light'>Generative Audio-visual Experiences</span>",
     "<div class='event-name'>Thank you</div>",
 ];
-var speakerIndex;
+var speakerIndex = 0;
 var speakerText;
 var showCursor = true;
 var colorCombinations;
@@ -54,7 +54,7 @@ function setup() {
 
     var cursorIntervalID = window.setInterval(setRandomCursorPos, 5000);
 
-    speakerText = addText(speakerNames[0])
+    speakerText = addText(speakerNames[0]);
 
     // Create an Audio input
     mic = new p5.AudioIn();
