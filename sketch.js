@@ -1,4 +1,5 @@
 var speakerNames = [
+    "<div class='event-name'>Welcome</div>",
     "<div class='event-name'>Daniel Llugany | Domestic Data Streamers</div><span class='event-title extra-light'>New Data Languages 😍</span>",
     "<div class='event-name'>Gene Kogan</div><span class='event-title extra-light'>Machine Learning for Artists</span>",
     "<div class='event-name'>Santi Vilanova | Playmodes</div><span class='event-title extra-light'>Immersive Experiences</span>",
