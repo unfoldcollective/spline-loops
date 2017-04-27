@@ -112,8 +112,11 @@ function keyPressed() {
     // console.log(keyCode)
     if (parseInt(key) > 0 && parseInt(key) <= speakerNames.length) {
         setSpeakerText(parseInt(key)-1);
+        // set random spline colour combi
         var randomColorCombi = colorCombinations[getRandomInt(0, colorCombinations.length)];
         splineLoop1.setColors(randomColorCombi[0], randomColorCombi[1]);
+        // set random spline shape
+        splineLoop1.generateSplines();
     } else if (key === "C") {
         toggleCursor();
     } else if (key === "F") {
@@ -122,15 +125,21 @@ function keyPressed() {
         // set previous speaker
         if (speakerIndex > 0) {
             setSpeakerText(speakerIndex-1);
+            // set random spline colour combi
             var randomColorCombi = colorCombinations[getRandomInt(0, colorCombinations.length)];
             splineLoop1.setColors(randomColorCombi[0], randomColorCombi[1]);
+            // set random spline shape
+            splineLoop1.generateSplines();
         }
     } else if (keyCode === RIGHT_ARROW) {
         // set next speaker
         if (speakerIndex < speakerNames.length - 1) {
             setSpeakerText(speakerIndex + 1);
+            // set random spline colour combi
             var randomColorCombi = colorCombinations[getRandomInt(0, colorCombinations.length)];
             splineLoop1.setColors(randomColorCombi[0], randomColorCombi[1]);
+            // set random spline shape
+            splineLoop1.generateSplines();
         }
     }
     // uncomment to prevent any default behavior
