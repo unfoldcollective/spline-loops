@@ -122,11 +122,15 @@ function keyPressed() {
         // set previous speaker
         if (speakerIndex > 0) {
             setSpeakerText(speakerIndex-1);
+            var randomColorCombi = colorCombinations[getRandomInt(0, colorCombinations.length)];
+            splineLoop1.setColors(randomColorCombi[0], randomColorCombi[1]);
         }
     } else if (keyCode === RIGHT_ARROW) {
         // set next speaker
         if (speakerIndex < speakerNames.length - 1) {
             setSpeakerText(speakerIndex + 1);
+            var randomColorCombi = colorCombinations[getRandomInt(0, colorCombinations.length)];
+            splineLoop1.setColors(randomColorCombi[0], randomColorCombi[1]);
         }
     }
     // uncomment to prevent any default behavior
