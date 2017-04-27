@@ -107,12 +107,16 @@ function setSpeakerText(index) {
 }
 
 function keyPressed() {
+    // console.log(key)
+    // console.log(keyCode)
     if (parseInt(key) > 0 && parseInt(key) <= speakerNames.length) {
         setSpeakerText(parseInt(key)-1);
         var randomColorCombi = colorCombinations[getRandomInt(0, colorCombinations.length)];
         splineLoop1.setColors(randomColorCombi[0], randomColorCombi[1]);
-    } else if (key === "c") {
+    } else if (key === "C") {
         toggleCursor();
+    } else if (key === "F") {
+        toggleFullScreen();
     } else if (keyCode === LEFT_ARROW) {
         // set previous speaker
         if (speakerIndex > 0) {
@@ -134,7 +138,12 @@ function addText(string) {
     return myText;
 }
 
-function mouseClicked() {
+function mousePressed() {
+}
+
+function toggleFullScreen() {
+    var fs = fullscreen();
+    fullscreen(!fs);
 }
 
 function toggleCursor() {
