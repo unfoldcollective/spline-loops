@@ -1,18 +1,24 @@
 .text{
-	position: absolute;
-	left: 10%;
-	bottom: 10%;
-	color: white;
-	font-size: 3em;
-	font-family: "Montserrat", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+    color: white;
+    font-size: 3em;
+    font-family: "Montserrat", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+}
+
+.text ul {
+    list-style: none;
+    font-size: 22px;
+    padding-left: 0;
 }
 
 .light {
-	font-family: "Montserrat-Light", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    font-family: "Montserrat-Light", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
 }
 .extra-light {
-	font-family: "Montserrat-ExtraLight", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    font-family: "Montserrat-ExtraLight", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
 }
 .semi-bold {
-	font-family: "Montserrat-SemiBold", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    font-family: "Montserrat-SemiBold", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
 }

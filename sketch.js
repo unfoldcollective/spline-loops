@@ -1,13 +1,41 @@
 var speakerNames = [
-    "<div class='event-name'>Welcome</div>",
-    "<div class='event-name'>Daniel Llugany | Domestic Data Streamers</div><span class='event-title extra-light'>New Data Languages 😍</span>",
-    "<div class='event-name'>Gene Kogan</div><span class='event-title extra-light'>Machine Learning for Artists</span>",
-    "<div class='event-name'>Santi Vilanova | Playmodes</div><span class='event-title extra-light'>Immersive Experiences</span>",
-    "<div class='event-name'>Mario Klingemann</div><span class='event-title extra-light'>Artificial Intelligence</ispan",
-    "<div class='event-name'>Panel Discussion</div><span class='event-title extra-light'>Vera-Maria Glahn, Mario Klingemann, Santi Vilanova &amp; Mlady Pes</span>",
-    "<div class='event-name'>Mária Júdová</div><span class='event-title extra-light'>Dance Tech</ispan",
-    "<div class='event-name'>Vera-Maria Glahn | FIELD</div><span class='event-title extra-light'>Generative Audio-visual Experiences</span>",
-    "<div class='event-name'>Thank you</div>",
+    "<div class='event-name semi-bold'>Welcome</div>",
+    "<div class='event-name semi-bold'>Daniel Llugany | Domestic Data Streamers</div><span class='event-title extra-light'>New Data Languages 😍</span>",
+    "<div class='event-name semi-bold'>Gene Kogan</div><span class='event-title extra-light'>Machine Learning for Artists</span>",
+    "<div class='event-name semi-bold'>Break</div><span class='event-title extra-light'>13:00 - 14:00</span>",
+    "<div class='event-name semi-bold'>Santi Vilanova | Playmodes</div><span class='event-title extra-light'>Immersive Experiences</span>",
+    "<div class='event-name semi-bold'>Mario Klingemann</div><span class='event-title extra-light'>Artificial Intelligence</span>",
+    "<div class='event-name semi-bold'>Panel Discussion</div><span class='event-title extra-light'>Vera-Maria Glahn, Mario Klingemann, Santi Vilanova &amp; Mlady Pes</span>",
+    "<div class='event-name semi-bold'>Break</div><span class='event-title extra-light'>16:50 - 17:30</span>",
+    "<div class='event-name semi-bold'>Mária Júdová</div><span class='event-title extra-light'>Dance Tech</span>",
+    "<div class='event-name semi-bold'>Vera-Maria Glahn | FIELD</div><span class='event-title extra-light'>Generative Audio-visual Experiences</span>",
+    "<div class='event-name semi-bold'>\
+        <p>Thank you</p>\
+        <ul>\
+            <li><span class='semi-bold'>Barbora Janáková</span> - <span class='extra-light'>PR, marketing, production assistance, girl for everything and mental support</span></li>\
+            <li><span class='semi-bold'>Nina Adamcová</span> - <span class='extra-light'>artworks coordination, production assistance</span></li>\
+            <li><span class='semi-bold'>Štefánia Lovasová</span> - <span class='extra-light'>Instagram and poster guru</span></li>\
+            <li><span class='semi-bold'>Dominik Hlinka</span> - <span class='extra-light'>technical support</span></li>\
+            <li><span class='semi-bold'>Michal Čudrnák</span> - <span class='extra-light'>general support and helpfulness</span></li>\
+            <li><span class='semi-bold'>Matúš Solčány</span> - <span class='extra-light'>bringing logic and scissors</span></li>\
+            <li><span class='semi-bold'>Michal Chrastina</span> - <span class='extra-light'>strong hands and mind</span></li>\
+            <li><span class='semi-bold'>Anna Hunčíková</span> - <span class='extra-light'>welcome team</span></li>\
+            <li><span class='semi-bold'>Dominika Dubačová</span> - <span class='extra-light'>welcome team and driving</span></li>\
+            <li><span class='semi-bold'>Miri</span> - <span class='extra-light'>documentation</span></li>\
+            <li><span class='semi-bold'>Lukrécia Tilandyová</span> - <span class='extra-light'>tastiness</span></li>\
+            <li><span class='semi-bold'>Mad Drop</span> - <span class='extra-light'>energy</span></li>\
+            <li><span class='semi-bold'>Róbert Bonko</span> - <span class='extra-light'>sound</span></li>\
+            <li><span class='semi-bold'>Braňo Valter</span> - <span class='extra-light'>sound and picture</span></li>\
+            <li><span class='semi-bold'>Ján Adášek</span> - <span class='extra-light'>atmosphere</span></li>\
+            <li><span class='semi-bold'>Matej Fandl &amp; Lubica Drangová</span> - <span class='extra-light'>mental support and general helpfulness</span></li>\
+            <li><span class='semi-bold'>Zuzana Beniacová &amp; Jana Binder</span> - <span class='extra-light'>going one step further than neccessary </span></li>\
+        </ul>\
+    </div>\
+    <div class='mt4'>\
+        <img title='FPU' class='mr4 ph2 dib w5' src='./img/partners/logo-fpu.jpg' alt='FPU'>\
+        <img title='Studio 727' class='mh4 ph2 dib w4' src='./img/partners/logo-727.svg' alt='Studio 727'>\
+        <img title='Nethemba' class='mh4 ph2 dib w4' src='./img/partners/logo-nethemba.png' alt='Nethemba'>\
+    </div>",
 ];
 var speakerIndex = 0;
 var speakerText;
