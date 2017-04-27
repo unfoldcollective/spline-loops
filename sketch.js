@@ -8,6 +8,7 @@ var speakerNames = [
     "<div class='event-name'>Vera-Maria Glahn | FIELD</div><span class='event-title extra-light'>Generative Audio-visual Experiences</span>",
     "<div class='event-name'>Thank you</div>",
 ];
+var speakerIndex;
 var speakerText;
 var showCursor = true;
 var colorCombinations;
@@ -100,17 +101,28 @@ function includes(array, item) {
 }
 
 function setSpeakerText(index) {
+    speakerIndex = index;
     console.log('setSpeakerText: ' + index);
     speakerText.elt.innerHTML = speakerNames[index];
 }
 
-function keyTyped() {
+function keyPressed() {
     if (parseInt(key) > 0 && parseInt(key) <= speakerNames.length) {
         setSpeakerText(parseInt(key)-1);
         var randomColorCombi = colorCombinations[getRandomInt(0, colorCombinations.length)];
         splineLoop1.setColors(randomColorCombi[0], randomColorCombi[1]);
     } else if (key === "c") {
         toggleCursor();
+    } else if (keyCode === LEFT_ARROW) {
+        // set previous speaker
+        if (speakerIndex > 0) {
+            setSpeakerText(speakerIndex-1);
+        }
+    } else if (keyCode === RIGHT_ARROW) {
+        // set next speaker
+        if (speakerIndex < speakerNames.length - 1) {
+            setSpeakerText(speakerIndex + 1);
+        }
     }
     // uncomment to prevent any default behavior
     // return false;
