@@ -9,6 +9,7 @@ var speakerNames = [
     "<div class='event-name semi-bold'>Break</div><span class='event-title extra-light'>16:50 - 17:30</span>",
     "<div class='event-name semi-bold'>Mária Júdová</div><span class='event-title extra-light'>Dance Tech</span>",
     "<div class='event-name semi-bold'>Vera-Maria Glahn | FIELD</div><span class='event-title extra-light'>Generative Audio-visual Experiences</span>",
+    "<div class='event-name semi-bold'></div><span class='event-title extra-light'></span>",
     "<div class='event-name semi-bold'>\
         <p>Thank you</p>\
         <ul>\
@@ -16,7 +17,7 @@ var speakerNames = [
             <li><span class='semi-bold'>Nina Adamcová</span> - <span class='extra-light'>artworks coordination, production assistance</span></li>\
             <li><span class='semi-bold'>Štefánia Lovasová</span> - <span class='extra-light'>Instagram and poster guru</span></li>\
             <li><span class='semi-bold'>Dominik Hlinka</span> - <span class='extra-light'>technical support</span></li>\
-            <li><span class='semi-bold'>Michal Čudrnák</span> - <span class='extra-light'>general support and helpfulness</span></li>\
+            <li><span class='semi-bold'>Michal Čudrnák &amp; Lukáš Štepanovský</span> - <span class='extra-light'>general support and helpfulness</span></li>\
             <li><span class='semi-bold'>Matúš Solčány</span> - <span class='extra-light'>bringing logic and scissors</span></li>\
             <li><span class='semi-bold'>Michal Chrastina</span> - <span class='extra-light'>strong hands and mind</span></li>\
             <li><span class='semi-bold'>Anna Hunčíková</span> - <span class='extra-light'>welcome team</span></li>\
